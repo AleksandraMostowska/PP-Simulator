@@ -8,9 +8,11 @@ internal class Program
     static void Main(string[] args)
     {
 
-        Lab4a();
+        Lab5b();
 
-        Lab4b();
+        //Lab4a();
+
+        //Lab4b();
 
         //checkSpeed();
     }
@@ -105,4 +107,45 @@ internal class Program
         */
     }
 
+    static void Lab5b()
+    {
+        try
+        {
+            var r1 = new Rectangle(3, 5, 1, 1);
+            Console.WriteLine(r1);
+
+            var r2 = new Rectangle(1, 5, 3, 1);
+            Console.WriteLine(r2);
+
+            try
+            {
+                var r3 = new Rectangle(1, 1, 1, 5);
+                Console.WriteLine(r3);
+            }
+            catch (ArgumentException ex)
+            {
+                Console.WriteLine("ERROR: " + ex.Message);
+            }
+
+            var p1 = new Point(1, 1);
+            var p2 = new Point(3, 5);
+            var r4 = new Rectangle(p1, p2);
+            Console.WriteLine(r4);
+
+            var pointInside = new Point(2, 3);
+            var pointOutside = new Point(4, 6);
+            var pointOnEdge = new Point(1, 5);
+            var pointOnEdge2 = new Point(3, 1);
+
+            Console.WriteLine($"Point {pointInside} in rectangle? {r4.Contains(pointInside)}");
+            Console.WriteLine($"Point {pointOutside} in rectangle? {r4.Contains(pointOutside)}");
+            Console.WriteLine($"Point {pointOnEdge} in rectangle? {r4.Contains(pointOnEdge)}");
+            Console.WriteLine($"Point {pointOnEdge2} in rectangle? {r4.Contains(pointOnEdge2)}");
+
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error occured: {ex.Message}");
+        }
+    }
 }
