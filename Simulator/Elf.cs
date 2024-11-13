@@ -14,7 +14,6 @@ public class Elf : Creature
     public int Agility
     {
         get => agility;
-        //init => agility = value < 0 ? 0 : value > 10 ? 10 : value;
         init => agility = Validator.Limiter(value, 0, 10);
     }
 
@@ -31,13 +30,10 @@ public class Elf : Creature
 
     public void Sing()
     {
-        Console.WriteLine($"{Name} is singing.");
         singCtr++;
 
         if (singCtr % 3 == 0 && agility < 10) agility++;
     }
 
-    public override void SayHi() => Console.WriteLine(
-        $"Hi, I'm {Name}, my level is {Level}, my agility is {Agility}."
-    );
+    public override string Greeting() => $"Hi, I'm {Name}, my level is {Level}, my agility is {Agility}.";
 }

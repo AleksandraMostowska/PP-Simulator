@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Metadata.Ecma335;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -23,7 +24,7 @@ public class Orc : Creature
 
     public void Hunt()
     {
-        Console.WriteLine($"{Name} is hunting.");
+
         huntCtr++;
 
         if (huntCtr % 2 == 0 && rage < 10) rage++;
@@ -38,7 +39,5 @@ public class Orc : Creature
         Rage = rage;
     }
 
-    public override void SayHi() => Console.WriteLine(
-        $"Hi, I'm {Name}, my level is {Level}, my rage is {Rage}."
-    );
+    public override string Greeting() => $"Hi, I'm {Name}, my level is {Level}, my rage is {Rage}.";
 }

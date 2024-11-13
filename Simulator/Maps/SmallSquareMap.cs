@@ -6,13 +6,8 @@ using System.Threading.Tasks;
 
 namespace Simulator.Maps;
 
-internal class SmallSquareMap : Map
+public class SmallSquareMap : Map
 {
-
-    // Pole _bounds jest używane do przechowywania granic mapy jako pojedynczej instancji prostokąta (Rectangle).
-    // Dzięki temu przy każdym wywołaniu metody Exist nie tworzymy nowego obiektu Rectangle -
-    // unikamy niepotrzebnych alokacji pamięci na stercie. Granice są stałe dla danego rozmiaru mapy, 
-    // więc wystarczy utworzyć je raz w konstruktorze, a następnie wykorzystywać w metodach klasy.
     private readonly Rectangle _bounds;
     public int Size { get; }
 
