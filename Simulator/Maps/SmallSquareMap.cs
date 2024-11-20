@@ -6,19 +6,9 @@ using System.Threading.Tasks;
 
 namespace Simulator.Maps;
 
-public class SmallSquareMap : Map
+public class SmallSquareMap : SmallMap
 {
-    private readonly Rectangle _bounds;
-    public int Size { get; }
-
-    public SmallSquareMap(int size)
-    {
-        if (size < 5 || size > 20) throw new ArgumentOutOfRangeException("Wrong size! Element must be withing range [5; 20]");
-        Size = size;
-        _bounds = new Rectangle(0, 0, Size - 1, Size - 1);
-    }
-
-    public override bool Exist(Point p) => _bounds.Contains(p);
+    public SmallSquareMap(int size) : base(size, size) {   }
 
     public override Point Next(Point p, Direction d)
     {
