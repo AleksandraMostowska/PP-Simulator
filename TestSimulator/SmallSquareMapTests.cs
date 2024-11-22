@@ -18,7 +18,8 @@ public class SmallSquareMapTests
         // Act
         var map = new SmallSquareMap(size);
         // Assert
-        Assert.Equal(size, map.Size);
+        Assert.Equal(size, map.SizeX);
+        Assert.Equal(size, map.SizeY);
     }
 
     [Theory]
@@ -30,7 +31,7 @@ public class SmallSquareMapTests
     {
         // Act & Assert
         Assert.Throws<ArgumentOutOfRangeException>(() =>
-             new SmallTorusMap(size));
+             new SmallSquareMap(size));
     }
 
     [Theory]

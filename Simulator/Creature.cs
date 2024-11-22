@@ -1,8 +1,10 @@
-﻿using System;
+﻿using Simulator.Maps;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
 using System.Reflection.Emit;
+using System.Runtime.InteropServices.Marshalling;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -10,6 +12,8 @@ namespace Simulator;
 
 public abstract class Creature
 {
+    public Map? Map { get; private set; }
+    public Point Position { get; private set; }
     private string _name = "Unknown";
     private int _level = 1;
 
@@ -52,16 +56,29 @@ public abstract class Creature
         if (_level < 10) _level++;
     }
 
-    public string Go(Direction direction) => $"{Name} goes {direction.ToString().ToLower()}.";
-
-    public string[] Go(Direction[] directions) 
+    public void InitMapAndPosition(Map map, Point position)
     {
-        var results = new string[directions.Length];
-        for(int i = 0; i < directions.Length; i++) results[i] = Go(directions[i]);
-        return results;
+        if (map == null) throw new ArgumentNullException(nameof(map));
+        if (Map != null) throw new InvalidOperationException($"This creature is already on a map. It cannot be moved to a new map.");
+        if (!map.Exist(position)) throw new ArgumentException("Non-existing position for this map.");
+
+        Map = map;
+        Position = position;
+        map.Add(this, position);
     }
 
-    public string[] Go(string directionSeq) => Go(DirectionParser.Parse(directionSeq));
+    public string Go(Direction direction)
+    {
+
+        if (Map == null) throw new InvalidOperationException("Creature cannot move since it's not on the map!");
+
+        var newPosition = Map.Next(Position, direction);
+
+        Map.Move(this, Position, newPosition);
+        Position = newPosition;
+
+        return $"{Name} goes {direction.ToString().ToLower()}.";
+    }
 
     public override string ToString() => $"{GetType().Name.ToUpper()}: {Info}";
 
