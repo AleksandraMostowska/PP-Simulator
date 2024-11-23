@@ -31,8 +31,9 @@ public abstract class Map
     public void Move(Creature creature, Point posFrom, Point posTo)
     {
         if (!Exist(posFrom) || !Exist(posTo)) throw new ArgumentException("Oops! One of the positions is out of map!");
-        Add(creature, posTo);
         Remove(creature, posFrom);
+        Add(creature, posTo);
+        //Remove(creature, posFrom);
     }
 
     public abstract List<Creature>? At(int x, int y);
