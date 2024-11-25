@@ -2,15 +2,18 @@
 using System;
 using System.Diagnostics;
 using System.Runtime.Intrinsics;
+using System.Text;
 
 namespace Simulator;
 
-internal class Program
+public class Program
 {
     static void Main(string[] args)
     {
 
-        Lab7();
+        //Lab8();
+
+        //Lab7();
 
         //Lab5a();
 
@@ -155,94 +158,32 @@ internal class Program
         }
     }
 
-    //static void Lab5b()
-    //{
-    //    try
-    //    {
-    //        Console.WriteLine("\n===================================== [CREATE MAP] =====================================");
-    //        var map5 = new SmallSquareMap(5);
-    //        Console.WriteLine(map5.Size);
-
-    //        var map20 = new SmallSquareMap(20);
-    //        Console.WriteLine(map20.Size);
-
-    //        try
-    //        {
-    //            var map21 = new SmallSquareMap(21);
-    //        }
-    //        catch (ArgumentOutOfRangeException ex)
-    //        {
-    //            Console.WriteLine($"ERROR: {ex.Message}"); 
-    //        }
-
-    //        Console.WriteLine("\n===================================== [POINT BELONGING TO THE MAP] =====================================");
-    //        var pointInside = new Point(3, 3);
-    //        Console.WriteLine($"Point {pointInside} inside map 5x5? {map5.Exist(pointInside)}");
-
-
-    //        var pointOutside = new Point(6, 6);
-    //        Console.WriteLine($"Point {pointOutside} inside map 5x5? {map5.Exist(pointOutside)}");
-
-    //        var startPoint = new Point(2, 2);
-    //        var newPointUp = map5.Next(startPoint, Direction.Up);
-    //        var newPointRight = map5.Next(startPoint, Direction.Right);
-    //        var newPointDown = map5.Next(startPoint, Direction.Down);
-    //        var newPointLeft = map5.Next(startPoint, Direction.Left);
-
-    //        Console.WriteLine("\n===================================== [MOVING POINT] =====================================");
-    //        Console.WriteLine($"Start point: {startPoint},\nUp: {newPointUp},\nRight: {newPointRight},\nDown: {newPointDown},\nLeft: {newPointLeft}");
-
-
-    //        var outsideMove = new Point(4, 4);
-    //        var outsideMove2 = new Point(0, 0);
-    //        var movedOut = map5.Next(outsideMove, Direction.Up);
-    //        Console.WriteLine($"Point {outsideMove} after UP: {movedOut}");
-    //        movedOut = map5.Next(outsideMove2, Direction.Left);
-    //        Console.WriteLine($"Point {outsideMove2} after LEFT: {movedOut}");
-
-    //        var movedDiagonal = map5.NextDiagonal(startPoint, Direction.Up);
-    //        Console.WriteLine($"Point {startPoint} after UP-DIAGONAL: {movedDiagonal}");
-    //        movedDiagonal = map5.NextDiagonal(startPoint, Direction.Right);
-    //        Console.WriteLine($"Point {startPoint} after RIGHT-DIAGONAL: {movedDiagonal}");
-    //        movedDiagonal = map5.NextDiagonal(outsideMove2, Direction.Down);
-    //        Console.WriteLine($"Point {outsideMove2} after DOWN-DIAGONAL: {movedDiagonal}");
-
-    //        var movedDiagonalOut = map5.NextDiagonal(outsideMove, Direction.Up);
-    //        Console.WriteLine($"Point {outsideMove} after UP-DIAGONAL: {movedDiagonalOut}");
-
-    //    }
-    //    catch (Exception ex)
-    //    {
-    //        Console.WriteLine($"Error occured: {ex.Message}");
-    //    }
-
-    //}
 
     static void Lab7()
     {
         var squareMap = new SmallSquareMap(5);
         var torusMap = new SmallTorusMap(5, 5);
 
-        var elf = new Elf("Elf1", 3, 5); 
-        var elf2 = new Elf("Elf1", 1, 4); 
-        var orc = new Orc("Orc1", 2, 4); 
+        var elf = new Elf("Elf1", 3, 5);
+        var elf2 = new Elf("Elf1", 1, 4);
+        var orc = new Orc("Orc1", 2, 4);
 
         elf.InitMapAndPosition(squareMap, new Point(4, 4));
         elf2.InitMapAndPosition(squareMap, new Point(3, 3));
         //elf2.InitMapAndPosition(torusMap, new Point(3, 3));
-        orc.InitMapAndPosition(torusMap, new Point(0, 0)); 
+        orc.InitMapAndPosition(torusMap, new Point(0, 0));
 
-        Console.WriteLine($"Initial Position on Square Map (Elf): {elf.Position}"); 
-        Console.WriteLine($"Initial Position on Torus Map (Orc): {orc.Position}");  
+        Console.WriteLine($"Initial Position on Square Map (Elf): {elf.Position}");
+        Console.WriteLine($"Initial Position on Torus Map (Orc): {orc.Position}");
 
-        Console.WriteLine(elf.Go(Direction.Up));    
-        Console.WriteLine(elf.Go(Direction.Right)); 
+        Console.WriteLine(elf.Go(Direction.Up));
+        Console.WriteLine(elf.Go(Direction.Right));
 
-        Console.WriteLine(orc.Go(Direction.Right)); 
-        Console.WriteLine(orc.Go(Direction.Down));  
+        Console.WriteLine(orc.Go(Direction.Right));
+        Console.WriteLine(orc.Go(Direction.Down));
 
-        Console.WriteLine($"New Position on Square Map (Elf): {elf.Position}"); 
-        Console.WriteLine($"New Position on Torus Map (Orc): {orc.Position}");  
+        Console.WriteLine($"New Position on Square Map (Elf): {elf.Position}");
+        Console.WriteLine($"New Position on Torus Map (Orc): {orc.Position}");
 
         Console.WriteLine("Square Map Creatures at (2,2):");
         var squareCreatures = squareMap.At(2, 2);
@@ -260,4 +201,48 @@ internal class Program
         var torusCreatures2 = torusMap.At(1, 4);
         Console.WriteLine($"Number of creatures at (1, 4) on Torus Map: {torusCreatures2?.Count ?? 0}");
     }
+
+    //public static void Lab8()
+    //{
+    //    Console.OutputEncoding = Encoding.UTF8;
+
+    //    SmallSquareMap map = new SmallSquareMap(5);
+    //    List<Creature> creatures = new List<Creature>
+    //{
+    //    new Orc("Gorbag"),
+    //    new Elf("Elandor")
+    //};
+    //    List<Point> points = new List<Point>
+    //{
+    //    new Point(2, 2),
+    //    new Point(3, 1)
+    //};
+    //    string moves = "dlrludl";
+
+    //    Simulation simulation = new Simulation(map, creatures, points, moves);
+    //    MapVisualizer mapVisualizer = new MapVisualizer(map);
+
+
+    //    Console.WriteLine("SIMULATION!");
+    //    Console.WriteLine();
+    //    Console.WriteLine("Starting positions:");
+
+    //    mapVisualizer.Draw();
+    //    var turn = 1;
+
+    //    while (!simulation.Finished)
+    //    {
+    //        ConsoleKeyInfo key = Console.ReadKey(intercept: true);
+    //        Console.WriteLine($"Turn {turn}");
+    //        Console.WriteLine($"{simulation.CurrentCreature.Info} moves {simulation.CurrentMoveName}");
+
+    //        if (key.Key == ConsoleKey.Spacebar)
+    //        {
+    //            simulation.Turn();
+
+    //            mapVisualizer.Draw();
+    //            turn++;
+    //        }
+    //    }
+    //}
 }

@@ -117,11 +117,12 @@ public class Simulation
 
         _counter++;
         if (_counter >= Moves.Length) Finished = true;
+        //_counter++;
     }
 
 
     /// <summary>
     /// Validates moves input.
     /// </summary>
-    private string ValidateMoves(string moves) => new string(moves.Where(c => validMoves.Contains(Char.ToLower(c))).ToArray());
+    private string ValidateMoves(string moves) => new(moves.Where(c => validMoves.Contains(Char.ToLower(c))).ToArray());
 }
