@@ -234,7 +234,7 @@ public class Program
     //    {
     //        ConsoleKeyInfo key = Console.ReadKey(intercept: true);
     //        Console.WriteLine($"Turn {turn}");
-    //        Console.WriteLine($"{simulation.CurrentCreature.Info} moves {simulation.CurrentMoveName}");
+    //        Console.WriteLine($"{simulation.CurrentMappable.Info} moves {simulation.CurrentMoveName}");
 
     //        if (key.Key == ConsoleKey.Spacebar)
     //        {

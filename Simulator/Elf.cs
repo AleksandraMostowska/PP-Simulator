@@ -19,7 +19,7 @@ public class Elf : Creature
 
     public override int Power => 8 * Level + 2 * agility;
 
-    public override string Info => $"ELF: {Name} [{Level}][{Agility}]";
+    public override string Info => $"{Name} [{Level}][{Agility}]";
 
     public Elf() : base() { }
 

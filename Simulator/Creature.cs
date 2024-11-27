@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Simulator;
 
-public abstract class Creature
+public abstract class Creature : IMappable
 {
     public Map? Map { get; private set; }
     public Point Position { get; private set; }
@@ -67,7 +67,7 @@ public abstract class Creature
         map.Add(this, position);
     }
 
-    public string Go(Direction direction)
+    public void Go(Direction direction)
     {
 
         if (Map == null) throw new InvalidOperationException("Creature cannot move since it's not on the map!");
@@ -76,8 +76,6 @@ public abstract class Creature
 
         Map.Move(this, Position, newPosition);
         Position = newPosition;
-
-        return $"{Name} goes {direction.ToString().ToLower()}.";
     }
 
     public override string ToString() => $"{GetType().Name.ToUpper()}: {Info}";
