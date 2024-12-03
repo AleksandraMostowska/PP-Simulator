@@ -131,5 +131,4 @@ public class Simulation
             .Select(c => DirectionParser.Parse(c.ToString()).FirstOrDefault())
             .ToList();
     } 
-
 }
