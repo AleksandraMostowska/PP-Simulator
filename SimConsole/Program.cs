@@ -10,13 +10,15 @@ internal class Program
     {
         Console.OutputEncoding = Encoding.UTF8;
 
-        SmallSquareMap squareMap = new(5);
+        BigBounceMap map = new BigBounceMap(8, 6);
+
+        //SmallSquareMap map = new(5);
         //List<IMappable> creatures = [new Orc("Gorbag"), new Elf("Elandor")];
         //List<Point> points = [new(2, 2), new(3, 1)];
         //string moves = "dlrludl";
 
 
-        SmallTorusMap torusMap = new(8, 6);
+        //SmallTorusMap map = new(8, 6);
 
         List<IMappable> creatures2 = new()
         {
@@ -36,13 +38,13 @@ internal class Program
             new Point(0, 0) 
         };
 
-        string moves2 = "druldldrdlrluuu";
+        string moves2 = "druldldrulrluuurrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr";
 
 
 
 
-        Simulation simulation = new Simulation(torusMap, creatures2, points2, moves2);
-        MapVisualizer mapVisualizer = new MapVisualizer(torusMap);
+        Simulation simulation = new Simulation(map, creatures2, points2, moves2);
+        MapVisualizer mapVisualizer = new MapVisualizer(map);
 
 
         Console.WriteLine("SIMULATION!");
@@ -63,7 +65,14 @@ internal class Program
                 simulation.Turn();
                 mapVisualizer.Draw();
                 turn++;
+
+                
             }
         }
+
+        simulation.History.ShowState(5);
+        simulation.History.ShowState(10);
+        simulation.History.ShowState(15);
+        simulation.History.ShowState(20);
     }
 }
