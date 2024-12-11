@@ -38,7 +38,7 @@ internal class Program
             new Point(0, 0) 
         };
 
-        string moves2 = "druldldrulrluuurrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr";
+        string moves2 = "drrluud";
 
 
 
@@ -52,27 +52,37 @@ internal class Program
         Console.WriteLine("Starting positions:");
 
         mapVisualizer.Draw();
-        var turn = 1;
+        var turn = 0;
 
-        while (!simulation.Finished)
+        //while (!simulation.Finished)
+        //{
+        //    ConsoleKeyInfo key = Console.ReadKey(intercept: true);
+        //    Console.WriteLine($"Turn {turn}");
+        //    Console.WriteLine($"{simulation.CurrentMappable} moves {simulation.CurrentMoveName}");
+
+        //    if (key.Key == ConsoleKey.Spacebar)
+        //    {
+        //        simulation.Turn();
+        //        mapVisualizer.Draw();
+        //        turn++;
+        //    }
+        //}
+
+        var history = new SimulationHistory(simulation);
+        //foreach (var log in history.TurnLogs)
+        //{
+        //    Console.WriteLine($"Turn:{turn} {log.Mappable} moved {log.Move}");
+        //}
+
+
+        var log5 = history.TurnLogs[5];
+        Console.WriteLine(history._simulation.Moves);
+        Console.WriteLine($"Turn: 5 - {log5.Mappable} moved {log5.Move}");
+        foreach (var symbol in log5.Symbols)
         {
-            ConsoleKeyInfo key = Console.ReadKey(intercept: true);
-            Console.WriteLine($"Turn {turn}");
-            Console.WriteLine($"{simulation.CurrentMappable} moves {simulation.CurrentMoveName}");
-
-            if (key.Key == ConsoleKey.Spacebar)
-            {
-                simulation.Turn();
-                mapVisualizer.Draw();
-                turn++;
-
-                
-            }
+            Console.WriteLine($"Position: {symbol.Key}, Symbol: {symbol.Value}");
         }
 
-        simulation.History.ShowState(5);
-        simulation.History.ShowState(10);
-        simulation.History.ShowState(15);
-        simulation.History.ShowState(20);
+
     }
 }

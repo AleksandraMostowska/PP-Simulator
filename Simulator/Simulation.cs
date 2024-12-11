@@ -74,11 +74,6 @@ public class Simulation
 
 
     /// <summary>
-    /// Helps to store simulation history.
-    /// </summary>
-    public SimulationHistory History { get; }
-
-    /// <summary>
     /// Simulation constructor.
     /// Throw errors:
     /// if creatures' list is empty,
@@ -102,20 +97,12 @@ public class Simulation
         Positions = positions;
         Moves = moves;
         ParsedMoves = ValidateMoves(moves);
-        History = new SimulationHistory();
 
 
         for (int i = 0; i < mappables.Count; i++)
         {
             mappables[i].InitMapAndPosition(map, positions[i]);
         }
-
-        History.SaveState(
-            _counter,
-            Mappables.ToDictionary(m => m, m => m.Position),
-            null,
-            null
-        );
     }
 
     /// <summary>
@@ -130,15 +117,9 @@ public class Simulation
         var direction = ParsedMoves[_counter % ParsedMoves.Count];
         CurrentMappable.Go(direction);
 
-        History.SaveState(
-            _counter,
-            Mappables.ToDictionary(m => m, m => m.Position),
-            CurrentMappable,
-            direction
-        );
-
         _counter++;
         if (_counter >= Moves.Length) Finished = true;
+        //_counter++;
     }
 
 
