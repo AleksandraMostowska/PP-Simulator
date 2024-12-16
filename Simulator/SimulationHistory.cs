@@ -9,7 +9,7 @@ namespace Simulator;
 
 public class SimulationHistory
 {
-    public Simulation _simulation { get; }
+    private Simulation _simulation { get; }
     public int SizeX { get; }
     public int SizeY { get; }
     public List<SimulationTurnLog> TurnLogs { get; } = [];
@@ -24,28 +24,44 @@ public class SimulationHistory
         Run();
     }
 
+    public string GetMoves() => _simulation.Moves;
+
+
+    public Map GetMap() => _simulation.Map;
+
     private void Run()
     {
-        var map = _simulation.Map;
+
+        TurnLogs.Add(new SimulationTurnLog
+        {
+            Mappable = string.Empty,
+            Move = string.Empty,
+            Symbols = _simulation.Mappables
+            .GroupBy(m => m.Position)
+            .ToDictionary(
+                group => group.Key,
+                group => group.Count() > 1 ? 'X' : group.First().Symbol
+            )
+        });
 
         while (!_simulation.Finished)
         {
             var currentMappable = _simulation.CurrentMappable;
             var move = _simulation.CurrentMoveName;
 
-            var symbols = _simulation.Mappables.ToDictionary(
-                m => m.Position,
-                m => m.Symbol
-            );
+            _simulation.Turn();
 
             TurnLogs.Add(new SimulationTurnLog
             {
                 Mappable = currentMappable.ToString(),
                 Move = move,
-                Symbols = symbols
+                Symbols = _simulation.Mappables
+                            .GroupBy(m => m.Position)
+                            .ToDictionary(
+                                group => group.Key,
+                                group => group.Count() > 1 ? 'X' : group.First().Symbol
+                            )
             });
-
-            _simulation.Turn();
         }
     }
 }

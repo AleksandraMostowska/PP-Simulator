@@ -108,7 +108,7 @@ internal class Program
                 new Point(0, 0)
             };
 
-        string moves2 = "drrluud";
+        string moves2 = "dlrludluddlrulr";
 
         Simulation simulation = new Simulation(map, creatures2, points2, moves2);
         MapVisualizer mapVisualizer = new MapVisualizer(map);
@@ -137,8 +137,9 @@ internal class Program
         var logVisualizer = new LogVisulizer(history);
 
         logVisualizer.Draw(5);
-        logVisualizer.Draw(3);
-
+        logVisualizer.Draw(10);
+        logVisualizer.Draw(15);
+        logVisualizer.Draw(20);
 
     }
 }
