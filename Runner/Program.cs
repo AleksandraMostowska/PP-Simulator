@@ -10,20 +10,27 @@ public class Program
 {
     static void Main(string[] args)
     {
+        var creatures = new List<Creature>
+            {
+            new Orc("Gorbag") { Level = 5, Rage = 10 },
+            new Elf("Elandor") { Level = 5, Agility = 7 },
+            new Orc("Gorbag") { Level = 2, Rage = 5 },
+            new Elf("Elandor") { Level = 5, Agility = 12 },
+            new Orc("Gorbag") { Level = 8, Rage = 6 },
+            new Elf("Elandor") { Level = 5, Agility = 2 },
+            new Orc("Gorbag") { Level = 1, Rage = 2 },
+            new Elf("Elandor") { Level = 5, Agility = 4 },
+            new Orc("Gorbag") { Level = 2, Rage = 4 },
+            new Elf("Elandor") { Level = 5, Agility = 9 }
+            };
 
-        //Lab8();
+        Console.WriteLine("Before sort:");
+        foreach (var creature in creatures) Console.WriteLine($"{creature.ToString()}, POWER: {creature.Power}");
 
-        //Lab7();
+        creatures.Sort((cr1, cr2) => cr1.Power.CompareTo(cr2.Power));
 
-        //Lab5a();
-
-        //Lab5b();
-
-        //Lab4a();
-
-        //Lab4b();
-
-        //checkSpeed();
+        Console.WriteLine("After sort:");
+        foreach (var creature in creatures) Console.WriteLine($"{creature.ToString()}, POWER: {creature.Power}");
     }
 
     static void checkSpeed()
@@ -168,81 +175,82 @@ public class Program
         var elf2 = new Elf("Elf1", 1, 4);
         var orc = new Orc("Orc1", 2, 4);
 
-        elf.InitMapAndPosition(squareMap, new Point(4, 4));
-        elf2.InitMapAndPosition(squareMap, new Point(3, 3));
-        //elf2.InitMapAndPosition(torusMap, new Point(3, 3));
-        orc.InitMapAndPosition(torusMap, new Point(0, 0));
+        //    elf.InitMapAndPosition(squareMap, new Point(4, 4));
+        //    elf2.InitMapAndPosition(squareMap, new Point(3, 3));
+        //    //elf2.InitMapAndPosition(torusMap, new Point(3, 3));
+        //    orc.InitMapAndPosition(torusMap, new Point(0, 0));
 
-        Console.WriteLine($"Initial Position on Square Map (Elf): {elf.Position}");
-        Console.WriteLine($"Initial Position on Torus Map (Orc): {orc.Position}");
+        //    Console.WriteLine($"Initial Position on Square Map (Elf): {elf.Position}");
+        //    Console.WriteLine($"Initial Position on Torus Map (Orc): {orc.Position}");
 
-        Console.WriteLine(elf.Go(Direction.Up));
-        Console.WriteLine(elf.Go(Direction.Right));
+        //    Console.WriteLine(elf.Go(Direction.Up));
+        //    Console.WriteLine(elf.Go(Direction.Right));
 
-        Console.WriteLine(orc.Go(Direction.Right));
-        Console.WriteLine(orc.Go(Direction.Down));
+        //    Console.WriteLine(orc.Go(Direction.Right));
+        //    Console.WriteLine(orc.Go(Direction.Down));
 
-        Console.WriteLine($"New Position on Square Map (Elf): {elf.Position}");
-        Console.WriteLine($"New Position on Torus Map (Orc): {orc.Position}");
+        //    Console.WriteLine($"New Position on Square Map (Elf): {elf.Position}");
+        //    Console.WriteLine($"New Position on Torus Map (Orc): {orc.Position}");
 
-        Console.WriteLine("Square Map Creatures at (2,2):");
-        var squareCreatures = squareMap.At(2, 2);
-        Console.WriteLine($"Number of creatures at (2, 2) on Square Map: {squareCreatures?.Count ?? 0}");
+        //    Console.WriteLine("Square Map Creatures at (2,2):");
+        //    var squareCreatures = squareMap.At(2, 2);
+        //    Console.WriteLine($"Number of creatures at (2, 2) on Square Map: {squareCreatures?.Count ?? 0}");
 
-        Console.WriteLine("Square Map Creatures at (3,3):");
-        var squareCreatures2 = squareMap.At(3, 3);
-        Console.WriteLine($"Number of creatures at (3, 3) on Square Map: {squareCreatures2?.Count ?? 0}");
+        //    Console.WriteLine("Square Map Creatures at (3,3):");
+        //    var squareCreatures2 = squareMap.At(3, 3);
+        //    Console.WriteLine($"Number of creatures at (3, 3) on Square Map: {squareCreatures2?.Count ?? 0}");
 
-        Console.WriteLine("Torus Map Creatures at (0,0):");
-        var torusCreatures = torusMap.At(0, 0);
-        Console.WriteLine($"Number of creatures at (0, 0) on Torus Map: {torusCreatures?.Count ?? 0}");
+        //    Console.WriteLine("Torus Map Creatures at (0,0):");
+        //    var torusCreatures = torusMap.At(0, 0);
+        //    Console.WriteLine($"Number of creatures at (0, 0) on Torus Map: {torusCreatures?.Count ?? 0}");
 
-        Console.WriteLine("Torus Map Creatures at (1,4):");
-        var torusCreatures2 = torusMap.At(1, 4);
-        Console.WriteLine($"Number of creatures at (1, 4) on Torus Map: {torusCreatures2?.Count ?? 0}");
+        //    Console.WriteLine("Torus Map Creatures at (1,4):");
+        //    var torusCreatures2 = torusMap.At(1, 4);
+        //    Console.WriteLine($"Number of creatures at (1, 4) on Torus Map: {torusCreatures2?.Count ?? 0}");
+        //}
+
+        //public static void Lab8()
+        //{
+        //    Console.OutputEncoding = Encoding.UTF8;
+
+        //    SmallSquareMap map = new SmallSquareMap(5);
+        //    List<Creature> creatures = new List<Creature>
+        //{
+        //    new Orc("Gorbag"),
+        //    new Elf("Elandor")
+        //};
+        //    List<Point> points = new List<Point>
+        //{
+        //    new Point(2, 2),
+        //    new Point(3, 1)
+        //};
+        //    string moves = "dlrludl";
+
+        //    Simulation simulation = new Simulation(map, creatures, points, moves);
+        //    MapVisualizer mapVisualizer = new MapVisualizer(map);
+
+
+        //    Console.WriteLine("SIMULATION!");
+        //    Console.WriteLine();
+        //    Console.WriteLine("Starting positions:");
+
+        //    mapVisualizer.Draw();
+        //    var turn = 1;
+
+        //    while (!simulation.Finished)
+        //    {
+        //        ConsoleKeyInfo key = Console.ReadKey(intercept: true);
+        //        Console.WriteLine($"Turn {turn}");
+        //        Console.WriteLine($"{simulation.CurrentMappable.Info} moves {simulation.CurrentMoveName}");
+
+        //        if (key.Key == ConsoleKey.Spacebar)
+        //        {
+        //            simulation.Turn();
+
+        //            mapVisualizer.Draw();
+        //            turn++;
+        //        }
+        //    }
+        //}
     }
-
-    //public static void Lab8()
-    //{
-    //    Console.OutputEncoding = Encoding.UTF8;
-
-    //    SmallSquareMap map = new SmallSquareMap(5);
-    //    List<Creature> creatures = new List<Creature>
-    //{
-    //    new Orc("Gorbag"),
-    //    new Elf("Elandor")
-    //};
-    //    List<Point> points = new List<Point>
-    //{
-    //    new Point(2, 2),
-    //    new Point(3, 1)
-    //};
-    //    string moves = "dlrludl";
-
-    //    Simulation simulation = new Simulation(map, creatures, points, moves);
-    //    MapVisualizer mapVisualizer = new MapVisualizer(map);
-
-
-    //    Console.WriteLine("SIMULATION!");
-    //    Console.WriteLine();
-    //    Console.WriteLine("Starting positions:");
-
-    //    mapVisualizer.Draw();
-    //    var turn = 1;
-
-    //    while (!simulation.Finished)
-    //    {
-    //        ConsoleKeyInfo key = Console.ReadKey(intercept: true);
-    //        Console.WriteLine($"Turn {turn}");
-    //        Console.WriteLine($"{simulation.CurrentMappable.Info} moves {simulation.CurrentMoveName}");
-
-    //        if (key.Key == ConsoleKey.Spacebar)
-    //        {
-    //            simulation.Turn();
-
-    //            mapVisualizer.Draw();
-    //            turn++;
-    //        }
-    //    }
-    //}
 }
