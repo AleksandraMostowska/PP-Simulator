@@ -15,6 +15,9 @@ public abstract class Map
     private readonly Rectangle _bounds;
     public int SizeX { get; }
     public int SizeY { get; }
+    protected Func<Map, Point, Direction, Point>? FNext { get; set; }
+    protected Func<Map, Point, Direction, Point>? FNextDiagonal { get; set; }
+
 
     Dictionary<Point, List<IMappable>>? _fields;
 
@@ -29,7 +32,6 @@ public abstract class Map
         _fields = new Dictionary<Point, List<IMappable>>();
     }
 
-    //public abstract void Add(IMappable mappable, Point position);
     public void Add(IMappable mappable, Point position)
     {
         CheckIfPositionWithinMap(position);
@@ -55,17 +57,12 @@ public abstract class Map
 
     public List<IMappable>? At(int x, int y) => At(new Point(x, y));
 
-    //public abstract void Remove(IMappable mappable, Point position);
     public void Move(IMappable mappable, Point posFrom, Point posTo)
     {
-        //if (!Exist(posFrom) || !Exist(posTo)) throw new ArgumentException("Oops! One of the positions is out of map!");
         Remove(mappable, posFrom);
         Add(mappable, posTo);
-        //Remove(mappable, posFrom);
     }
 
-    //public abstract List<IMappable>? At(int x, int y);
-    //public abstract List<IMappable>? At(Point position);
 
 
     /// <summary>
@@ -81,7 +78,9 @@ public abstract class Map
     /// <param name="p">Starting point.</param>
     /// <param name="d">Direction.</param>
     /// <returns>Next point.</returns>
-    public abstract Point Next(Point p, Direction d);
+    public Point Next(Point p, Direction d) => FNext?.Invoke(this, p, d) ?? p;
+
+    //Func<Point, Direction, Point> Next = (p, d) => ;
 
     /// <summary>
     /// Next diagonal position to the point in a given direction 
@@ -90,7 +89,7 @@ public abstract class Map
     /// <param name="p">Starting point.</param>
     /// <param name="d">Direction.</param>
     /// <returns>Next point.</returns>
-    public abstract Point NextDiagonal(Point p, Direction d);
+    public Point NextDiagonal(Point p, Direction d) => FNextDiagonal?.Invoke(this, p, d) ?? p;
 
 
     private void CheckIfPositionWithinMap(Point position)
